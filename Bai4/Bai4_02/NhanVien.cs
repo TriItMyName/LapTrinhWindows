@@ -8,9 +8,9 @@ namespace Bai4_02
 {
     internal class NhanVien
     {
-        private int ID;
-        private string Name;
-        private int Luong;
+        private int Id;
+        private string NAME;
+        private int LUONG;
 
         public NhanVien()
         {
@@ -18,13 +18,27 @@ namespace Bai4_02
 
         public NhanVien(int iD, string name, int luong)
         {
-            ID1 = iD;
-            Name1 = name;
-            Luong1 = luong;
+            Id = iD;
+            NAME = name;
+            LUONG = luong;
         }
 
-        public int ID1 { get => ID; set => ID = value; }
-        public string Name1 { get => Name; set => Name = value; }
-        public int Luong1 { get => Luong; set => Luong = value; }
+        public int ID
+        {
+            get => Id;
+            set => Id = value;
+        }
+
+        public string Name
+        {
+            get => NAME;
+            set => NAME = value;
+        }
+
+        public int Luong
+        {
+            get => LUONG;
+            set => LUONG = value;
+        }
     }
 }

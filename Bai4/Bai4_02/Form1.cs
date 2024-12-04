@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Bai4_02
 {
@@ -24,11 +25,12 @@ namespace Bai4_02
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            NV = new List<NhanVien>();
-
-            NV.Add(new NhanVien(1, "Nguyen Van A", 1000));
-            NV.Add(new NhanVien(2, "Nguyen Van B", 2000));
-
+            NV = new List<NhanVien>
+                    {
+                        new NhanVien(1, "Nguyen Van A", 1000),
+                        new NhanVien(2, "Nguyen Van B", 2000)
+                    };
+            dtgNhanVien.DataSource = null;
             dtgNhanVien.DataSource = NV;
         }
 
@@ -42,36 +44,43 @@ namespace Bai4_02
         public void AddNhanVien(int id, string name, int luong)
         {
             NV.Add(new NhanVien(id, name, luong));
-            dtgNhanVien.DataSource = null; // Reset the DataSource to refresh the DataGridView
+            dtgNhanVien.DataSource = null;
             dtgNhanVien.DataSource = NV;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Form2 frm = new Form2();
-            frm.PassData = new delPassData(EditNhanVien);
-            frm.Show();
+            if (dtgNhanVien.SelectedRows.Count > 0)
+            {
+                int selectedIndex = dtgNhanVien.SelectedRows[0].Index;
+                NhanVien nv = NV[selectedIndex];
+
+                Form2 frm = new Form2(nv.ID, nv.Name, nv.Luong);
+                frm.PassData = new delPassData(EditNhanVien);
+                frm.Show();
+            }      
         }
 
         public void EditNhanVien(int id, string name, int luong)
         {
-            NhanVien nv = NV.FirstOrDefault(x => x.ID1 == id);
+            NhanVien nv = NV.Where(n => n.ID == id).FirstOrDefault();
+
             if (nv != null)
             {
-                nv.Name1 = name;
-                nv.Luong1 = luong;
-                dtgNhanVien.DataSource = null; // Reset the DataSource to refresh the DataGridView
-                dtgNhanVien.DataSource = NV;
+                nv.Name = name;
+                nv.Luong = luong;
             }
+            dtgNhanVien.DataSource = null;
+            dtgNhanVien.DataSource = NV;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dtgNhanVien.SelectedRows.Count > 0)
+            if (dtgNhanVien.SelectedRows.Count > 0)
             {
                 int selectedIndex = dtgNhanVien.SelectedRows[0].Index;
                 int id = int.Parse(dtgNhanVien[0, selectedIndex].Value.ToString());
-                NhanVien nv = NV.FirstOrDefault(x => x.ID1 == id);
+                NhanVien nv = NV.FirstOrDefault(x => x.ID == id);
                 if (nv != null)
                 {
                     NV.Remove(nv);
@@ -87,6 +96,20 @@ namespace Bai4_02
             if (result == DialogResult.Yes)
             {
                 this.Close();
+            }
+        }
+
+        private void dtgNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int selectedIndex = e.RowIndex;
+
+                NhanVien nv = NV[selectedIndex];
+
+                Form2 frm = new Form2(nv.ID, nv.Name, nv.Luong);
+                frm.PassData = new delPassData(EditNhanVien);
+                frm.Show();
             }
         }
     }
