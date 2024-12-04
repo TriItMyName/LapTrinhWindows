@@ -26,6 +26,7 @@ namespace Bai4_02
 
         public Form2()
         {
+            InitializeComponent();
         }
 
         private void btnAccpet_Click(object sender, EventArgs e)
