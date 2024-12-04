@@ -76,6 +76,7 @@
             this.dtgNhanVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgNhanVien.Size = new System.Drawing.Size(509, 385);
             this.dtgNhanVien.TabIndex = 4;
+            this.dtgNhanVien.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgNhanVien_CellClick);
             // 
             // btnClose
             // 
@@ -99,7 +100,7 @@
             this.Controls.Add(this.btnAdd);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "List View";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgNhanVien)).EndInit();
             this.ResumeLayout(false);

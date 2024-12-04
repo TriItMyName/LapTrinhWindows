@@ -16,14 +16,16 @@ namespace Bai4_02
     {
         public Form1.delPassData PassData { get; internal set; }
 
-        public Form2()
+        public Form2(int id,string name, int luong)
         {
             InitializeComponent();
+            txtId.Text = id.ToString();
+            txtName.Text = name;
+            txtLuong.Text = luong.ToString();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        public Form2()
         {
-
         }
 
         private void btnAccpet_Click(object sender, EventArgs e)
@@ -39,7 +41,7 @@ namespace Bai4_02
                 }
                 else
                 {
-                    MessageBox.Show("Tên không hợp lê", "Lỗi xác thực", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tên không hợp lệ", "Lỗi xác thực", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -62,5 +64,7 @@ namespace Bai4_02
                 this.Close();
             }
         }
+
+       
     }
 }
