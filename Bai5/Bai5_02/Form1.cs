@@ -48,7 +48,9 @@ namespace Bai5_02
         {
             if (cmbFonts.SelectedItem != null && cmbSize.SelectedItem != null)
             {
-                richTextBox1.Font = new Font(cmbFonts.SelectedItem.ToString(), Convert.ToSingle((int)cmbSize.SelectedItem));
+                string selectedFont = cmbFonts.SelectedItem.ToString();
+                float selectedSize = Convert.ToSingle(cmbSize.SelectedItem);
+                richTextBox1.Font = new Font(selectedFont, selectedSize);
             }
         }
 
@@ -87,7 +89,6 @@ namespace Bai5_02
                 richTextBox1.Font = fontDialog.Font;
                 richTextBox1.ForeColor = fontDialog.Color;
             }
-
         }
 
         private void CreateTextToolStripMenuItem_Click(object sender, EventArgs e)
