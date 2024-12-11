@@ -18,6 +18,7 @@ namespace Bai5_02
         {
             InitializeComponent();
             InitializeCustomComponents();
+            RegisterShortcuts();
         }
 
         private void InitializeCustomComponents()
@@ -49,6 +50,29 @@ namespace Bai5_02
             {
                 richTextBox1.Font = new Font(cmbFonts.SelectedItem.ToString(), Convert.ToSingle((int)cmbSize.SelectedItem));
             }
+        }
+
+        private void RegisterShortcuts()
+        {
+            this.KeyPreview = true;
+            this.KeyDown += (sender, e) =>
+            {
+                if (e.Control && e.KeyCode == Keys.N)
+                {
+                    CreateTextToolStripMenuItem_Click(sender, e);
+                    e.Handled = true;
+                }
+                else if (e.Control && e.KeyCode == Keys.O)
+                {
+                    OpenToolStripMenuItem_Click(sender, e);
+                    e.Handled = true;
+                }
+                else if (e.Control && e.KeyCode == Keys.S)
+                {
+                    SaveToolStripMenuItem_Click(sender, e);
+                    e.Handled = true;
+                }
+            };
         }
 
         private void FormatToolStripMenuItem_Click(object sender, EventArgs e)
